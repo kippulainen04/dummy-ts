@@ -1,9 +1,7 @@
-/// <reference path="base-component.ts" />
-/// <reference path="../decorators/autobind.ts"/>
-/// <reference path="../util/validation.ts"/>
-/// <reference path="../state/project-state.ts"/>
-
-namespace App {
+import { Component } from './base-component.js';
+import * as Validation from '../util/validation.js';
+import { autobind } from '../decorators/autobind.js';
+import { projectState } from '../state/project-state.js';
 
 // ProjectInput CLass
 export class ProjectInput extends Component<HTMLDivElement, HTMLFormElement> {
@@ -36,16 +34,16 @@ export class ProjectInput extends Component<HTMLDivElement, HTMLFormElement> {
         const enteredDescription = this.descriptionInputEl.value;
         const enteredPeople = this.peopleInputEl.value;
 
-        const titleValidatable: Validatable = {
+        const titleValidatable: Validation.Validatable = {
             value: enteredTitle,
             required: true
         }
-        const descriptionValidatable: Validatable = {
+        const descriptionValidatable: Validation.Validatable = {
             value: enteredDescription,
             required: true,
             minLength: 5
         }
-        const peoplealidatable: Validatable = {
+        const peoplealidatable: Validation.Validatable = {
             value: enteredPeople,
             required: true,
             min: 1,
@@ -54,9 +52,9 @@ export class ProjectInput extends Component<HTMLDivElement, HTMLFormElement> {
 
     
         if (
-          !validate(titleValidatable) ||
-          !validate(descriptionValidatable) ||
-          !validate(peoplealidatable)
+          !Validation.validate(titleValidatable) ||
+          !Validation.validate(descriptionValidatable) ||
+          !Validation.validate(peoplealidatable)
         ) {
           alert('Invalid input, please try again!');
           return;
@@ -84,4 +82,3 @@ export class ProjectInput extends Component<HTMLDivElement, HTMLFormElement> {
     }
 }
 
-}
